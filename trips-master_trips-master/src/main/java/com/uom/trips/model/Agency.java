@@ -23,14 +23,21 @@ public class Agency {
 	
 	public Agency() {}
 	
-	public Agency(int agencyid, String afm, String name, String owner, String password) {//, List<Trip> trips
+	public Agency(int agencyid, String afm, String name, String owner, String password, List<Trip> trips) {
 		super();
 		this.agencyid = agencyid;
 		this.afm = afm;
 		this.name = name;
 		this.owner = owner;
 		this.password = password;
-		//this.trips = trips;
+		this.trips = trips;
+	}
+	
+	public Agency(String afm, String name, String owner, String password) {
+		this.afm = afm;
+		this.name = name;
+		this.owner = owner;
+		this.password = password;
 	}
 
 	public int getAgencyid() {

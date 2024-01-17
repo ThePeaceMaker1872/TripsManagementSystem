@@ -41,16 +41,18 @@ public class Reservation {
 		return citizen;
 	}
 
-	public void setCitizen(Citizen citizen) {
-		this.citizen = citizen;
+	public void setCitizen(Citizen c) {
+		citizen = c;
+		c.addReservation(this);
 	}
 
 	public Trip getTrip() {
 		return trip;
 	}
 
-	public void setTrip(Trip trip) {
-		this.trip = trip;
+	public void setTrip (Trip t) {
+		trip = t;
+		t.addReservation(this);
 	}
 
 }

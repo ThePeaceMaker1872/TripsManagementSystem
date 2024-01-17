@@ -34,6 +34,24 @@ public class Citizen {
 		this.password = password;
 		this.reservations = reservations;
 	}
+	
+	public Citizen(String afm, String firstName, String lastName, String email, String password) {
+		this.afm = afm;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public Citizen(String afm, String firstName, String lastName, String email, String password,
+			List<Reservation> reservations) {
+		this.afm = afm;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.reservations = reservations;
+	}
 
 	public int getCitizenId() {
 		return citizenId;
@@ -89,6 +107,10 @@ public class Citizen {
 
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
+	}
+	
+	public void addReservation (Reservation r) {
+		reservations.add(r);
 	}
 	
 	

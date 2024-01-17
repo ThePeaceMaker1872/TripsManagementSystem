@@ -2,6 +2,8 @@ package com.uom.trips.controller;
 
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.uom.trips.exception.ResourseNotFoundException;
@@ -26,7 +28,14 @@ public class TripController {
 	
 	@PostMapping(path = "/addTrip")
 	public void addTrip(@RequestBody Trip trip) throws Exception{
-		tripService.addTrip(trip);
+		tripService.addTrip2(trip);
+	}
+	
+	@PostMapping("/addTrip/{agencyid}")
+    public ResponseEntity<Trip> addTrip(@RequestBody Trip trip, @PathVariable int agencyid) throws Exception {
+		return new ResponseEntity<>(
+                tripService.addTrip(trip, agencyid), 
+                HttpStatus.CREATED);
 	}
 	
 	
