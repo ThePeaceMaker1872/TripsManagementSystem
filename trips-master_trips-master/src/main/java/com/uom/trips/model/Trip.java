@@ -26,6 +26,7 @@ public class Trip {
 	@JoinColumn(name = "agencyid")
 	private Agency agency;
 	
+	
 	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
 	private List<Reservation> reservations;
 	
@@ -33,7 +34,7 @@ public class Trip {
 	public Trip() {}
 	
 	public Trip(int travelId, String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate,
-			int maxLimit, Agency agency) {
+			int maxLimit) { //Agency agency
 		super();
 		this.travelId = travelId;
 		this.departureLocation = departureLocation;
@@ -95,9 +96,11 @@ public class Trip {
 	public Agency getAgency() {
 		return agency;
 	}
-
+	
+	//new
 	public void setAgency(Agency agency) {
 		this.agency = agency;
+		agency.addTrip(this);
 	}
 
 

@@ -18,19 +18,19 @@ public class Agency {
 	private String password;
 	
 	@OneToMany(mappedBy = "agency", cascade= CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Trip> trips;
+	private List<Trip> trips = new ArrayList<Trip>(); //new
 	
 	
 	public Agency() {}
 	
-	public Agency(int agencyid, String afm, String name, String owner, String password, List<Trip> trips) {
+	public Agency(int agencyid, String afm, String name, String owner, String password) {//, List<Trip> trips
 		super();
 		this.agencyid = agencyid;
 		this.afm = afm;
 		this.name = name;
 		this.owner = owner;
 		this.password = password;
-		this.trips = trips;
+		//this.trips = trips;
 	}
 
 	public int getAgencyid() {
@@ -79,6 +79,11 @@ public class Agency {
 
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
+	}
+	
+	//new
+	public void addTrip(Trip trip) {
+		trips.add(trip);
 	}
 	
 	
