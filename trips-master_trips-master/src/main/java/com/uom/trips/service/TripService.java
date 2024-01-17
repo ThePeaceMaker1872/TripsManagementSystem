@@ -31,17 +31,31 @@ public class TripService {
 		tripRepository.save(trip);
 	}
 	
-	public Trip addTrip(Trip trip, int agencyid) throws Exception {
+	/*public Trip addTrip(Trip trip, int agencyid) throws Exception {
 		Agency agency = agencyRepository.findById(agencyid);
 		trip.setAgency(agency);
 		return tripRepository.save(trip);
+	}*/
+	
+	public void addTrip(Trip trip) throws Exception {
+        Optional<Agency> optionalAgency = agencyRepository.findById(trip.getTravelId());
+
+        if (!optionalAgency.isPresent()) {
+            
+            tripRepository.save(trip);
+        } 
+        
+   
 	}
+	
+	
 	
 	
 	public Trip getTripById(int travelId) throws Exception{
 		return tripRepository.findById(travelId);
 		
 	}
+	
 	
 	public List<Trip> findTripsByArrivalLocation(String arrivalLocation) throws Exception{
 		return tripRepository.findByArrivalLocation(arrivalLocation);
@@ -51,3 +65,4 @@ public class TripService {
 		return tripRepository.findByDepartureLocation(departureLocation);
 	}
 }
+	

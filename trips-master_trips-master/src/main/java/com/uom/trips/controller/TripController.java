@@ -7,7 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.uom.trips.exception.ResourseNotFoundException;
+import com.uom.trips.model.Agency;
 import com.uom.trips.model.Trip;
+import com.uom.trips.repository.AgencyRepository;
+import com.uom.trips.repository.TripRepository;
+import com.uom.trips.service.AgencyService;
 import com.uom.trips.service.TripService;
 
 import java.util.*;
@@ -21,6 +25,8 @@ public class TripController {
 	@Autowired
 	private TripService tripService;
 	
+	
+	
 	@GetMapping(path = "/trips")
 	public List<Trip> getAllTrips() throws Exception{
 		return tripService.getAllTrips();
@@ -28,17 +34,14 @@ public class TripController {
 	
 	@PostMapping(path = "/addTrip")
 	public void addTrip(@RequestBody Trip trip) throws Exception{
-		tripService.addTrip2(trip);
-	}
-	
-	@PostMapping("/addTrip/{agencyid}")
-    public ResponseEntity<Trip> addTrip(@RequestBody Trip trip, @PathVariable int agencyid) throws Exception {
-		return new ResponseEntity<>(
-                tripService.addTrip(trip, agencyid), 
-                HttpStatus.CREATED);
+		tripService.addTrip(trip);
 	}
 	
 	
+	
+	
+	
+
 	
 	@GetMapping(path = "/trips/{id}")
 	public Trip getTripbyId(@PathVariable ("id") int travelId) throws Exception {

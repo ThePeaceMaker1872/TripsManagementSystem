@@ -34,7 +34,7 @@ public class Trip {
 	public Trip() {}
 	
 	public Trip(int travelId, String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate,
-			int maxLimit, Agency agency) { 
+			int maxLimit) { 
 		super();
 		this.travelId = travelId;
 		this.departureLocation = departureLocation;
@@ -42,27 +42,21 @@ public class Trip {
 		this.departureDate = departureDate;
 		this.arrivalDate = arrivalDate;
 		this.maxLimit = maxLimit;
-		this.agency = agency;
+		
 	}
 	
 	
-	public Trip(String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate, int maxLimit,
-			Agency agency) {
+	public Trip(String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate, int maxLimit
+			) {
 		this.departureLocation = departureLocation;
 		this.arrivalLocation = arrivalLocation;
 		this.departureDate = departureDate;
 		this.arrivalDate = arrivalDate;
 		this.maxLimit = maxLimit;
-		this.agency = agency;
+		
 	}
 	
-	public Trip(String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate, int maxLimit) {
-		this.departureLocation = departureLocation;
-		this.arrivalLocation = arrivalLocation;
-		this.departureDate = departureDate;
-		this.arrivalDate = arrivalDate;
-		this.maxLimit = maxLimit;
-	}
+	
 	
 	public void addReservation (Reservation r) {
 		reservations.add(r);
