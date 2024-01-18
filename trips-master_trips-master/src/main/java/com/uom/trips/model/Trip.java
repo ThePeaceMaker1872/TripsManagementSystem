@@ -2,6 +2,7 @@ package com.uom.trips.model;
 
 import java.sql.*;
 import javax.persistence.*;
+
 import java.util.Date; 
 import java.util.HashSet;
 import java.util.List;
@@ -27,41 +28,45 @@ public class Trip {
 	private Agency agency;
 	
 	
-	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
-	private List<Reservation> reservations;
-	
-	
+	@ManyToMany(mappedBy="trips")
+	private Set<Citizen> citizens = new HashSet<Citizen>();
+
+		
 	public Trip() {}
 	
+	public Trip(String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate, int maxLimit,
+			Agency agency) {
+		this.departureLocation = departureLocation;
+		this.arrivalLocation = arrivalLocation;
+		this.departureDate = departureDate;
+		this.arrivalDate = arrivalDate;
+		this.maxLimit = maxLimit;
+		this.agency = agency;
+	}
+
+	public Trip(String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate, int maxLimit,
+			Agency agency, Set<Citizen> citizens) {
+		this.departureLocation = departureLocation;
+		this.arrivalLocation = arrivalLocation;
+		this.departureDate = departureDate;
+		this.arrivalDate = arrivalDate;
+		this.maxLimit = maxLimit;
+		this.agency = agency;
+		this.citizens = citizens;
+	}
+
 	public Trip(int travelId, String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate,
-			int maxLimit) { 
-		super();
+			int maxLimit, Agency agency, Set<Citizen> citizens) {
 		this.travelId = travelId;
 		this.departureLocation = departureLocation;
 		this.arrivalLocation = arrivalLocation;
 		this.departureDate = departureDate;
 		this.arrivalDate = arrivalDate;
 		this.maxLimit = maxLimit;
-		
+		this.agency = agency;
+		this.citizens = citizens;
 	}
 	
-	
-	public Trip(String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate, int maxLimit
-			) {
-		this.departureLocation = departureLocation;
-		this.arrivalLocation = arrivalLocation;
-		this.departureDate = departureDate;
-		this.arrivalDate = arrivalDate;
-		this.maxLimit = maxLimit;
-		
-	}
-	
-	
-	
-	public void addReservation (Reservation r) {
-		reservations.add(r);
-	}
-
 	public int getTravelId() {
 		return travelId;
 	}
@@ -110,10 +115,18 @@ public class Trip {
 		this.maxLimit = maxLimit;
 	}
 
+	public Set<Citizen> getCitizens() {
+		return citizens;
+	}
+
+	public void setCitizens(Set<Citizen> citizens) {
+		this.citizens = citizens;
+	}
+
 	public Agency getAgency() {
 		return agency;
 	}
-	
+
 	//new
 	public void setAgency(Agency agency) {
 		this.agency = agency;

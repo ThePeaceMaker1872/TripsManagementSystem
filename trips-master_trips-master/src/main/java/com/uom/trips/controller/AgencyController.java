@@ -27,15 +27,14 @@ public class AgencyController {
 	        Agency signedInAgency = agencyService.signIn(afm, password);
 
 	        if (signedInAgency != null) {
-	            // Return some information about the signed-in citizen if needed
-	            // You can customize this response based on your requirements
+	            
 	            return ResponseEntity.ok("Sign-in successful");
 	        } else {
 	            // Invalid credentials
 	            return ResponseEntity.status(401).body("Invalid email or password");
 	        }
 	    } catch (Exception e) {
-	        // Handle exceptions if needed
+	        
 	        return ResponseEntity.status(500).body("Internal server error");
 	    }
 	}

@@ -81,9 +81,6 @@ public class Agency {
 	}
 
 	
-
-	
-	
 	//new
 	public void addTrip(Trip trip) {
 		trips.add(trip);

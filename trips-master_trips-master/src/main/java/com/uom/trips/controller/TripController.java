@@ -37,12 +37,7 @@ public class TripController {
 		tripService.addTrip(trip);
 	}
 	
-	
-	
-	
-	
 
-	
 	@GetMapping(path = "/trips/{id}")
 	public Trip getTripbyId(@PathVariable ("id") int travelId) throws Exception {
 		return tripService.getTripById(travelId);

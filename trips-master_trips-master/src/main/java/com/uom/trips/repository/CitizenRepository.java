@@ -9,4 +9,7 @@ public interface CitizenRepository extends JpaRepository<Citizen, Integer>{
 	Citizen findByEmail(String email);
 	
 	Citizen findById (int citizenId);
+	
+	Citizen findByAfm (String afm);
 }
+

@@ -20,15 +20,15 @@ public class AgencyService {
 	
 	
 	public Agency signIn(String afm, String password) throws Exception {
-	   	 // Log the received credentials for debugging
+	   	 
 	       System.out.println("Received afm: " + afm);
 	       System.out.println("Received password: " + password);
 	   	
 	   	
-	   	// Find the citizen with the given email
+	   	
 	       Agency agency = agencyRepository.findByAfm(afm);
 	       
-	       // Log the retrieved Citizen object
+	      
 	       System.out.println("Retrieved Agency: " + agency);
 
 	       // Check if the citizen exists and the password matches

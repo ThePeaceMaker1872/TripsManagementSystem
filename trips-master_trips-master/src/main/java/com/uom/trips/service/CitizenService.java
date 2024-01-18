@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uom.trips.model.Citizen;
+import com.uom.trips.model.Trip;
 import com.uom.trips.repository.CitizenRepository;
 
 @Service
@@ -20,15 +21,15 @@ public class CitizenService {
 	
 	
 	public Citizen signIn(String email, String password) throws Exception {
-   	   // Log the received credentials for debugging
+   	   
        System.out.println("Received email: " + email);
        System.out.println("Received password: " + password);
    	
    	
-   	   // Find the citizen with the given email
+   	   
        Citizen citizen = citizenRepository.findByEmail(email);
        
-       // Log the retrieved Citizen object
+       
        System.out.println("Retrieved Citizen: " + citizen);
 
        // Check if the citizen exists and the password matches
@@ -39,5 +40,18 @@ public class CitizenService {
            return null;
        }
    }
+	
+	public void registerToTrip(Trip t) {
+		int maxLimit = t.getMaxLimit();
+	    if (maxLimit > 0) {
+	        t.setMaxLimit(maxLimit - 1);
+	        //trips.add(t);
+	    } else {
+	        System.out.println("No available seats for this trip.");
+	    }
+	}
+	
+	
 
 }
+

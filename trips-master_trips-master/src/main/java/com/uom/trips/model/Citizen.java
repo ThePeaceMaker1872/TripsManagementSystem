@@ -1,8 +1,12 @@
 package com.uom.trips.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
+
+
 
 @Entity
 @Table(name = "citizens")
@@ -18,22 +22,29 @@ public class Citizen {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy = "citizen", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Reservation> reservations;
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="reservations",
+		joinColumns = @JoinColumn(name="citizenId"),
+	   inverseJoinColumns = @JoinColumn(name="tripId"))
+	private Set<Trip> trips = new HashSet<Trip>();
+	
+	/*
+	public void registerToTrip(Trip t) {
+		int maxLimit = t.getMaxLimit();
+	    if (maxLimit > 0) {
+	        t.setMaxLimit(maxLimit - 1);
+	        trips.add(t);
+	    } else {
+	        System.out.println("No available seats for this trip.");
+	    }
+	}
+	*/
+
+		public Set<Trip> getTrips() {return trips;}
+
 	
 	public Citizen() {}
 	
-	public Citizen(int citizenId, String afm, String firstName, String lastName, String email, String password,
-			List<Reservation> reservations) {
-		super();
-		this.citizenId = citizenId;
-		this.afm = afm;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.reservations = reservations;
-	}
 	
 	public Citizen(String afm, String firstName, String lastName, String email, String password) {
 		this.afm = afm;
@@ -42,15 +53,35 @@ public class Citizen {
 		this.email = email;
 		this.password = password;
 	}
+
 	
-	public Citizen(String afm, String firstName, String lastName, String email, String password,
-			List<Reservation> reservations) {
+	public Citizen(String afm, String firstName, String lastName, String email, String password, Set<Trip> trips) {
 		this.afm = afm;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.reservations = reservations;
+		this.trips = trips;
+	}
+
+	public Citizen(int citizenId, String afm, String firstName, String lastName, String email, String password,
+			Set<Trip> trips) {
+		this.citizenId = citizenId;
+		this.afm = afm;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.trips = trips;
+	}
+	
+	public Citizen(int citizenId, String afm, String firstName, String lastName, String email, String password) {
+		this.citizenId = citizenId;
+		this.afm = afm;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
 	}
 
 	public int getCitizenId() {
@@ -101,19 +132,10 @@ public class Citizen {
 		this.password = password;
 	}
 
-	public List<Reservation> getReservations() {
-		return reservations;
+	public void setTrips(Set<Trip> trips) {
+		this.trips = trips;
 	}
 
-	public void setReservations(List<Reservation> reservations) {
-		this.reservations = reservations;
-	}
 	
-	public void addReservation (Reservation r) {
-		reservations.add(r);
-	}
-	
-	
-		
 
 }
