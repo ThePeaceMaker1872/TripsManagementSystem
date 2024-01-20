@@ -25,23 +25,15 @@ public class Citizen {
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="reservations",
 		joinColumns = @JoinColumn(name="citizenId"),
-	   inverseJoinColumns = @JoinColumn(name="tripId"))
+	   inverseJoinColumns = @JoinColumn(name="travelId"))
 	private Set<Trip> trips = new HashSet<Trip>();
 	
-	/*
-	public void registerToTrip(Trip t) {
-		int maxLimit = t.getMaxLimit();
-	    if (maxLimit > 0) {
-	        t.setMaxLimit(maxLimit - 1);
-	        trips.add(t);
-	    } else {
-	        System.out.println("No available seats for this trip.");
-	    }
+	
+
+	//new
+	public void addTripToCitizen(Trip t) throws Exception {
+		trips.add(t);	
 	}
-	*/
-
-		public Set<Trip> getTrips() {return trips;}
-
 	
 	public Citizen() {}
 	
@@ -135,6 +127,8 @@ public class Citizen {
 	public void setTrips(Set<Trip> trips) {
 		this.trips = trips;
 	}
+	
+	public Set<Trip> getTrips() {return trips;}
 
 	
 

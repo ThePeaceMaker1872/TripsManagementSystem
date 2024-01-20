@@ -39,9 +39,20 @@ public class CitizenController {
 	    }
 	}
 	
+	
+	
+	
+	//new
 	@PostMapping(path = "/registerToTrip")
-	public void registerToTrip(@RequestBody Trip trip) throws Exception{
-		citizenService.registerToTrip(trip);
+	public ResponseEntity<String> registerToTrip(@RequestParam("citizenId") int citizenId, 
+            @RequestParam("travelId") int travelId) {
+		try {
+			citizenService.registerToTrip(citizenId, travelId);
+			return ResponseEntity.ok("Successfully registered to the trip.");
+		} catch (Exception e) {
+			// Handle exceptions if needed
+	        return ResponseEntity.status(500).body("Error registering to the trip.");
+		}
 	}
 
 }

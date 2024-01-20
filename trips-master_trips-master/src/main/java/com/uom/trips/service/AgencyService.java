@@ -1,5 +1,7 @@
 package com.uom.trips.service;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,4 +41,10 @@ public class AgencyService {
 	           return null;
 	       }
 	}  
+	
+	//new
+	public List<Agency> getAllAgencies() throws Exception{
+		return agencyRepository.findAll();
+		
+	}
 }

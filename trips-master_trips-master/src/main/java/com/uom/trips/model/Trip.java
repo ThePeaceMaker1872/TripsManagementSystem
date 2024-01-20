@@ -132,6 +132,13 @@ public class Trip {
 		this.agency = agency;
 		agency.addTrip(this);
 	}
+	
+	
+	//new
+	public void addCitizenToTrip(Citizen citizen) {
+        citizens.add(citizen);
+        
+    }
 
 
 }

@@ -1,5 +1,7 @@
 package com.uom.trips.controller;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +40,13 @@ public class AgencyController {
 	        return ResponseEntity.status(500).body("Internal server error");
 	    }
 	}
+	
+	//new
+	@GetMapping(path = "/agencies")
+	public List<Agency> getAllAgencies() throws Exception{
+		return agencyService.getAllAgencies();
+	}
 
 }
+
+

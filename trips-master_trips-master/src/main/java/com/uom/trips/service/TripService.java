@@ -43,6 +43,12 @@ public class TripService {
    
 	}
 	
+	//new
+	public Trip trip (int tripId) {
+		Trip trip = tripRepository.findById(tripId);
+		return trip;
+			}
+	
 	
 	public Trip getTripById(int travelId) throws Exception{
 		return tripRepository.findById(travelId);
