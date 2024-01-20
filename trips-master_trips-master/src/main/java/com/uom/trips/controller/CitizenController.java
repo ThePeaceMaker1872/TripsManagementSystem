@@ -1,5 +1,7 @@
 package com.uom.trips.controller;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,27 +23,31 @@ public class CitizenController {
 		citizenService.registerCitizen(citizen);
 	}
 	
+	//new
 	@PostMapping(path = "/signin")
-	public ResponseEntity<?> signIn(@RequestParam String email, @RequestParam String password) {
-	    try {
-	        Citizen signedInCitizen = citizenService.signIn(email, password);
 
-	        if (signedInCitizen != null) {
-	            
-	            return ResponseEntity.ok("Sign-in successful");
-	        } else {
-	            // Invalid credentials
-	            return ResponseEntity.status(401).body("Invalid email or password");
-	        }
-	    } catch (Exception e) {
-	        
-	        return ResponseEntity.status(500).body("Internal server error");
-	    }
+	public ResponseEntity<?> signIn(@RequestParam String email, @RequestParam String password) {
+		
+	   try {
+	       Citizen signedInCitizen = citizenService.signIn(email, password);
+
+	       if (signedInCitizen != null) {
+         
+	           Map<String, Object> response = new HashMap<>();
+	           response.put("citizenId", signedInCitizen.getCitizenId());
+	           response.put("firstName", signedInCitizen.getFirstName());
+	           response.put("message", "Sign-in successful");
+	           return ResponseEntity.ok(response);
+
+	       } else {
+	          return ResponseEntity.status(401).body("Invalid email or password");
+	       }
+	   } catch (Exception e) {
+	       return ResponseEntity.status(500).body("Internal server error");
+	   }
 	}
 	
-	
-	
-	
+		
 	//new
 	@PostMapping(path = "/registerToTrip")
 	public ResponseEntity<String> registerToTrip(@RequestParam("citizenId") int citizenId, 
