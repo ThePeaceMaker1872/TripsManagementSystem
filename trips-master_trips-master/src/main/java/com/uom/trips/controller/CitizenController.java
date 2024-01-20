@@ -51,7 +51,7 @@ public class CitizenController {
 			return ResponseEntity.ok("Successfully registered to the trip.");
 		} catch (Exception e) {
 			// Handle exceptions if needed
-	        return ResponseEntity.status(500).body("Error registering to the trip.");
+	        return ResponseEntity.status(500).body("No available seats!");
 		}
 	}
 

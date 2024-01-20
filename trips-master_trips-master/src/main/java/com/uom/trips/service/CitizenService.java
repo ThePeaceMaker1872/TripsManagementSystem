@@ -46,7 +46,8 @@ public class CitizenService {
 			citizenRepository.save(citizen);
 		} 
 		else {
-			System.out.println("No available seats for this trip.");
+			throw new Exception();
+			//System.out.println("No available seats for this trip.");
 		}
 	}
 	
