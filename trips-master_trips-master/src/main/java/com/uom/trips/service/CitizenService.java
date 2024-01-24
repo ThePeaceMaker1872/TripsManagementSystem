@@ -1,6 +1,9 @@
 package com.uom.trips.service;
 
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +34,13 @@ public class CitizenService {
 		return citizen;
 		}
 	
-	//new
-	public void registerToTrip(int citizenId, int travelId) throws Exception {
+	
+	
+	/*public void registerToTrip(int citizenId, int travelId) throws Exception {
 		Citizen citizen = citizenRepository.findById(citizenId);
 		Trip trip = tripRepository.findById(travelId);
-		
+	
+	
 		int maxLimit = trip.getMaxLimit();
 		if (maxLimit > 0) {
 			trip.setMaxLimit(maxLimit - 1);
@@ -44,11 +49,35 @@ public class CitizenService {
 			// Save as a good practice, since cascadeType is not .ALL
 			tripRepository.save(trip);
 			citizenRepository.save(citizen);
-		} 
-		else {
-			throw new Exception();
-			//System.out.println("No available seats for this trip.");
-		}
+			} 
+			else {
+				throw new Exception();
+				//System.out.println("No available seats for this trip.");
+			}
+		
+	}*/
+	
+	
+	public void registerToTrip(Citizen citizen, Trip trip) throws Exception {
+		
+		Optional<Citizen> CitizenbyIdOptional = citizenRepository.findById(citizen.getCitizenId());
+		Optional<Trip> tripByIOptional = tripRepository.findById(trip.getTravelId());
+	
+	
+		int maxLimit = trip.getMaxLimit();
+		if (maxLimit > 0) {
+			trip.setMaxLimit(maxLimit - 1);
+			citizen.addTripToCitizen(trip);
+			trip.addCitizenToTrip(citizen);
+			// Save as a good practice, since cascadeType is not .ALL
+			tripRepository.save(trip);
+			citizenRepository.save(citizen);
+			} 
+			else {
+				throw new Exception();
+				//System.out.println("No available seats for this trip.");
+			}
+		
 	}
 	
 	public Citizen signIn(String email, String password) throws Exception {
@@ -71,6 +100,13 @@ public class CitizenService {
            return null;
        }
    }
+
+
+	public List<Citizen> getAllCitizens() throws Exception{
+		return citizenRepository.findAll();
+		
+	}
+	
 	
 	
 	

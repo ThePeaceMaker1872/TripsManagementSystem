@@ -23,6 +23,11 @@ public class AgencyController {
 		agencyService.registerAgency(agency);
 	}
 	
+	//new
+		@GetMapping(path = "/agencies")
+		public List<Agency> getAllAgencies() throws Exception{
+			return agencyService.getAllAgencies();
+		}
 	
 	@PostMapping(path = "/agency/signin")
 	public ResponseEntity<?> signIn(@RequestParam String afm, @RequestParam String password) {
@@ -49,11 +54,7 @@ public class AgencyController {
 	
 	
 	
-	//new
-	@GetMapping(path = "/agencies")
-	public List<Agency> getAllAgencies() throws Exception{
-		return agencyService.getAllAgencies();
-	}
+	
 
 }
 

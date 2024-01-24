@@ -23,6 +23,13 @@ public class CitizenController {
 		citizenService.registerCitizen(citizen);
 	}
 	
+	
+	@GetMapping(path = "/citizens")
+	public List<Citizen> getAllCitizens() throws Exception {
+		return citizenService.getAllCitizens();
+	}
+	
+	
 	//new
 	@PostMapping(path = "/signin")
 
@@ -47,13 +54,25 @@ public class CitizenController {
 	   }
 	}
 	
-		
+	
 	//new
-	@PostMapping(path = "/registerToTrip")
+	/*@PostMapping(path = "/registerToTrip")
 	public ResponseEntity<String> registerToTrip(@RequestParam("citizenId") int citizenId, 
             @RequestParam("travelId") int travelId) {
 		try {
 			citizenService.registerToTrip(citizenId, travelId);
+			return ResponseEntity.ok("Successfully registered to the trip.");
+		} catch (Exception e) {
+			// Handle exceptions if needed
+	        return ResponseEntity.status(500).body("No available seats!");
+		}
+	}*/
+	
+	@PostMapping(path = "/registerToTrip")
+	public ResponseEntity<String> registerToTrip(@RequestParam Citizen citizen, @RequestParam Trip trip
+          ) {
+		try {
+			citizenService.registerToTrip(citizen, trip);
 			return ResponseEntity.ok("Successfully registered to the trip.");
 		} catch (Exception e) {
 			// Handle exceptions if needed

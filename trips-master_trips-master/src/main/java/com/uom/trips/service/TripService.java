@@ -27,11 +27,6 @@ public class TripService {
 		
 	}
 	
-	public void addTrip2(Trip trip) throws Exception {
-		tripRepository.save(trip);
-	}
-	
-	
 	
 	public void addTrip(Trip trip) throws Exception {
         Optional<Agency> optionalAgency = agencyRepository.findById(trip.getTravelId());
@@ -44,7 +39,7 @@ public class TripService {
 	}
 	
 	//new
-	public Trip trip (int tripId) {
+	/*public Trip trip (int tripId) {
 		Trip trip = tripRepository.findById(tripId);
 		return trip;
 			}
@@ -53,7 +48,7 @@ public class TripService {
 	public Trip getTripById(int travelId) throws Exception{
 		return tripRepository.findById(travelId);
 		
-	}
+	}*/
 	
 	
 	public List<Trip> findTripsByArrivalLocation(String arrivalLocation) throws Exception{

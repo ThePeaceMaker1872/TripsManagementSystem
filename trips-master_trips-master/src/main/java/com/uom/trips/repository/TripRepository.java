@@ -14,7 +14,9 @@ public interface TripRepository extends JpaRepository<Trip, Integer>{
 	
 	public List<Trip> findByDepartureLocation(String departureLocation);
 		
-	Trip findById(int tripId);
+	//Trip findById(int tripId);
+	
+	//Optional<Trip> findByIdOptional(int travelId);
 	
 	
 }

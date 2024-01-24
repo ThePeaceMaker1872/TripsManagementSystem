@@ -31,8 +31,10 @@ public class Citizen {
 	
 
 	//new
-	public void addTripToCitizen(Trip t) throws Exception {
-		trips.add(t);	
+	public void addTripToCitizen(Trip trip) throws Exception {
+		trips.add(trip);
+		//new
+		trip.getCitizens().add(this);
 	}
 	
 	public Citizen() {}

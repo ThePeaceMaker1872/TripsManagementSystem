@@ -38,11 +38,11 @@ public class TripController {
 	}
 	
 
-	@GetMapping(path = "/trips/{id}")
+	/*@GetMapping(path = "/trips/{id}")
 	public Trip getTripbyId(@PathVariable ("id") int travelId) throws Exception {
 		return tripService.getTripById(travelId);
 			
-	}
+	}*/
 	
 	
 	@GetMapping(path = "/trips/arrivallocation/{arrivallocation}")
