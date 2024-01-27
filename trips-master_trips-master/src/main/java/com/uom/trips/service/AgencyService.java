@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uom.trips.model.Agency;
+import com.uom.trips.model.Trip;
 import com.uom.trips.repository.AgencyRepository;
+import com.uom.trips.repository.TripRepository;
 
 @Service
 public class AgencyService {
@@ -14,7 +16,8 @@ public class AgencyService {
 	@Autowired
 	private AgencyRepository agencyRepository;
 	
-	
+	@Autowired
+	private TripRepository tripRepository;
 	
 	public void	registerAgency(Agency agency) throws Exception{
 		agencyRepository.save(agency);
@@ -40,7 +43,17 @@ public class AgencyService {
 	           // If no matching citizen is found or the password is incorrect, return null
 	           return null;
 	       }
-	}  
+	}
+	
+	public void addTrip(Trip trip) throws Exception {
+        Optional<Agency> optionalAgency = agencyRepository.findById(trip.getTravelId());
+
+        if (!optionalAgency.isPresent()) {
+            
+            tripRepository.save(trip);
+        }  
+   
+	}
 	
 	//new
 	public List<Agency> getAllAgencies() throws Exception{

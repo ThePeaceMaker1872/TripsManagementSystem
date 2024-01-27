@@ -37,8 +37,8 @@ public class CitizenService {
 	
 	
 	/*public void registerToTrip(int citizenId, int travelId) throws Exception {
-		Citizen citizen = citizenRepository.findById(citizenId);
-		Trip trip = tripRepository.findById(travelId);
+		Optional<Citizen> citizen = citizenRepository.findById(citizenId);
+		Optional<Trip> trip = tripRepository.findById(travelId);
 	
 	
 		int maxLimit = trip.getMaxLimit();
@@ -58,9 +58,9 @@ public class CitizenService {
 	}*/
 	
 	
-	public void registerToTrip(Citizen citizen, Trip trip) throws Exception {
+	public void registerToTrip(Trip trip, Citizen citizen) throws Exception {
 		
-		Optional<Citizen> CitizenbyIdOptional = citizenRepository.findById(citizen.getCitizenId());
+		//Optional<Citizen> CitizenbyIdOptional = citizenRepository.findById(citizen.getCitizenId());
 		Optional<Trip> tripByIOptional = tripRepository.findById(trip.getTravelId());
 	
 	
@@ -68,10 +68,10 @@ public class CitizenService {
 		if (maxLimit > 0) {
 			trip.setMaxLimit(maxLimit - 1);
 			citizen.addTripToCitizen(trip);
-			trip.addCitizenToTrip(citizen);
+			trip.registerCitizenToTrip(citizen);
 			// Save as a good practice, since cascadeType is not .ALL
 			tripRepository.save(trip);
-			citizenRepository.save(citizen);
+			//citizenRepository.save(citizen);
 			} 
 			else {
 				throw new Exception();

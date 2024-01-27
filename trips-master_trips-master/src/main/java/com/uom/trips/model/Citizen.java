@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -22,11 +24,18 @@ public class Citizen {
 	private String email;
 	private String password;
 	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "citizens")
+	private Set<Trip> trips = new HashSet<Trip>();
+	
+	
+	/*
+	//Rollback
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="reservations",
 		joinColumns = @JoinColumn(name="citizenId"),
 	   inverseJoinColumns = @JoinColumn(name="travelId"))
-	private Set<Trip> trips = new HashSet<Trip>();
+	private Set<Trip> trips = new HashSet<Trip>();*/
 	
 	
 

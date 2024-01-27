@@ -27,10 +27,35 @@ public class Trip {
 	@JoinColumn(name = "agencyid")
 	private Agency agency;
 	
-	
-	@ManyToMany(mappedBy="trips")
+	@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "reservations",
+		joinColumns = @JoinColumn(name = "travel_id"),
+		inverseJoinColumns = @JoinColumn(name = "citizen_id"))
 	private Set<Citizen> citizens = new HashSet<Citizen>();
-
+	
+	
+	public void registerCitizenToTrip(Citizen citizen) {
+		citizens.add(citizen);
+	}
+	
+	
+	
+	/*//Rollback
+	@ManyToMany(mappedBy="trips")
+	private Set<Citizen> citizens = new HashSet<Citizen>();*/
+	
+	//new
+	/*public void setAgency(Agency agency) {
+		this.agency = agency;
+		agency.addTrip(this);
+	}
+			
+	//new
+	public void addCitizenToTrip(Citizen citizen) {
+	     citizens.add(citizen);
+	 }
+	*/
+	
 		
 	public Trip() {}
 	
@@ -127,18 +152,6 @@ public class Trip {
 		return agency;
 	}
 
-	//new
-	public void setAgency(Agency agency) {
-		this.agency = agency;
-		agency.addTrip(this);
-	}
-	
-	
-	//new
-	public void addCitizenToTrip(Citizen citizen) {
-        citizens.add(citizen);
-        
-    }
 
 
 }

@@ -69,10 +69,10 @@ public class CitizenController {
 	}*/
 	
 	@PostMapping(path = "/registerToTrip")
-	public ResponseEntity<String> registerToTrip(@RequestParam Citizen citizen, @RequestParam Trip trip
+	public ResponseEntity<String> registerToTrip(@RequestParam Trip trip, @RequestParam Citizen citizen
           ) {
 		try {
-			citizenService.registerToTrip(citizen, trip);
+			citizenService.registerToTrip(trip,citizen);
 			return ResponseEntity.ok("Successfully registered to the trip.");
 		} catch (Exception e) {
 			// Handle exceptions if needed

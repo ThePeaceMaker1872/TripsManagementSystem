@@ -1,12 +1,14 @@
 package com.uom.trips.service;
 
 import com.uom.trips.model.Agency;
+import com.uom.trips.model.Citizen;
 
 import java.util.*;
 
 
 import com.uom.trips.model.Trip;
 import com.uom.trips.repository.AgencyRepository;
+import com.uom.trips.repository.CitizenRepository;
 import com.uom.trips.repository.TripRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class TripService {
 	@Autowired
 	private AgencyRepository agencyRepository;
 	
+	@Autowired
+	private CitizenRepository citizenRepository;
+	
 	public List<Trip> getAllTrips() throws Exception{
 		return tripRepository.findAll();
 		
@@ -34,9 +39,31 @@ public class TripService {
         if (!optionalAgency.isPresent()) {
             
             tripRepository.save(trip);
-        }    
+        }  
    
 	}
+	
+	/*public void registerCitizenToTrip(Trip trip) {
+		
+		Optional<Trip> tripByIOptional = tripRepository.findById(trip.getTravelId());
+		//Optional<Citizen> CitizenbyIdOptional = citizenRepository.findById(citizen.getCitizenId());
+		
+	
+	
+		int maxLimit = trip.getMaxLimit();
+		if (maxLimit > 0) {
+			trip.setMaxLimit(maxLimit - 1);
+			//citizen.addTripToCitizen(trip);
+			trip.registerCitizenToTrip(citizen);
+			// Save as a good practice, since cascadeType is not .ALL
+			tripRepository.save(trip);
+			//citizenRepository.save(citizen);
+			} 
+			else {
+				throw new Exception();
+				//System.out.println("No available seats for this trip.");
+			}
+	}*/
 	
 	//new
 	/*public Trip trip (int tripId) {

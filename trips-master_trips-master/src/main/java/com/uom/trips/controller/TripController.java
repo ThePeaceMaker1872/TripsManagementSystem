@@ -32,10 +32,6 @@ public class TripController {
 		return tripService.getAllTrips();
 	}
 	
-	@PostMapping(path = "/addTrip")
-	public void addTrip(@RequestBody Trip trip) throws Exception{
-		tripService.addTrip(trip);
-	}
 	
 
 	/*@GetMapping(path = "/trips/{id}")
