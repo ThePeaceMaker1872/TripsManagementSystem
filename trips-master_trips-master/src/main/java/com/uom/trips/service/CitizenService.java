@@ -61,7 +61,7 @@ public class CitizenService {
 	public void registerToTrip(Trip trip, Citizen citizen) throws Exception {
 		
 		//Optional<Citizen> CitizenbyIdOptional = citizenRepository.findById(citizen.getCitizenId());
-		Optional<Trip> tripByIOptional = tripRepository.findById(trip.getTravelId());
+		//Optional<Trip> tripByIOptional = tripRepository.findById(trip.getTravelId());
 	
 	
 		int maxLimit = trip.getMaxLimit();

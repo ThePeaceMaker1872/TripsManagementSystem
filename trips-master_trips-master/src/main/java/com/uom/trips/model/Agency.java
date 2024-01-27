@@ -2,6 +2,7 @@ package com.uom.trips.model;
 
 import java.util.*;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 
 @Entity
@@ -13,7 +14,11 @@ public class Agency {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int agencyid;
 	private String afm;
+	
+	@NotBlank(message = "Name is required.")
 	private String name;
+	
+	@NotBlank(message = "Name is required.")
 	private String owner;
 	private String password;
 	

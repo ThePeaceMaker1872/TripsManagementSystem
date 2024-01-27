@@ -2,6 +2,8 @@ package com.uom.trips.controller;
 
 import java.util.*;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,7 @@ public class CitizenController {
 	private CitizenService citizenService;
 	
 	@PostMapping(path = "/register")
-	public void registerCitizen(@RequestBody Citizen citizen) throws Exception{
+	public void registerCitizen(@Valid @RequestBody Citizen citizen) throws Exception{
 		citizenService.registerCitizen(citizen);
 	}
 	
@@ -45,6 +47,7 @@ public class CitizenController {
 	           response.put("firstName", signedInCitizen.getFirstName());
 	           response.put("message", "Sign-in successful");
 	           return ResponseEntity.ok(response);
+	           //return ResponseEntity.status(200).body("Sign-in successful");
 
 	       } else {
 	          return ResponseEntity.status(401).body("Invalid email or password");

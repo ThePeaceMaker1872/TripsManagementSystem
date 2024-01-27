@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.*;
+import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,8 +21,14 @@ public class Citizen {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int citizenId;
 	private String afm;
+	
+	@NotBlank(message = "First name is required.")
 	private String firstName;
+	@NotBlank(message = "Last name is required.")
 	private String lastName;
+	
+	@NotEmpty(message = "The email is required.")
+	@Email(message = "The email is not a valid email.")
 	private String email;
 	private String password;
 	

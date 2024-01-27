@@ -2,6 +2,8 @@ package com.uom.trips.controller;
 
 import java.util.*;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ public class AgencyController {
 	private TripService tripService;
 	
 	@PostMapping(path = "/agency/register")
-	public void registerAgency(@RequestBody Agency agency) throws Exception{
+	public void registerAgency(@Valid @RequestBody Agency agency) throws Exception{
 		agencyService.registerAgency(agency);
 	}
 	
