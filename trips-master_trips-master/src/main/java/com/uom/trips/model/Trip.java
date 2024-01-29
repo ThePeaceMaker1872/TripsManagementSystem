@@ -22,6 +22,7 @@ public class Trip {
 	private Date departureDate;
 	private Date arrivalDate;
 	private int maxLimit;
+	private String description;
 	
 	@ManyToOne
 	@JoinColumn(name = "agencyid")
@@ -60,34 +61,37 @@ public class Trip {
 	public Trip() {}
 	
 	public Trip(String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate, int maxLimit,
-			Agency agency) {
+			String description,Agency agency) {
 		this.departureLocation = departureLocation;
 		this.arrivalLocation = arrivalLocation;
 		this.departureDate = departureDate;
 		this.arrivalDate = arrivalDate;
 		this.maxLimit = maxLimit;
+		this.description = description;
 		this.agency = agency;
 	}
 
 	public Trip(String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate, int maxLimit,
-			Agency agency, Set<Citizen> citizens) {
+			String description,Agency agency, Set<Citizen> citizens) {
 		this.departureLocation = departureLocation;
 		this.arrivalLocation = arrivalLocation;
 		this.departureDate = departureDate;
 		this.arrivalDate = arrivalDate;
 		this.maxLimit = maxLimit;
+		this.description = description;
 		this.agency = agency;
 		this.citizens = citizens;
 	}
 
 	public Trip(int travelId, String departureLocation, String arrivalLocation, Date departureDate, Date arrivalDate,
-			int maxLimit, Agency agency, Set<Citizen> citizens) {
+			int maxLimit, String description,Agency agency, Set<Citizen> citizens) {
 		this.travelId = travelId;
 		this.departureLocation = departureLocation;
 		this.arrivalLocation = arrivalLocation;
 		this.departureDate = departureDate;
 		this.arrivalDate = arrivalDate;
 		this.maxLimit = maxLimit;
+		this.description = description;
 		this.agency = agency;
 		this.citizens = citizens;
 	}
@@ -150,6 +154,16 @@ public class Trip {
 
 	public Agency getAgency() {
 		return agency;
+	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 
