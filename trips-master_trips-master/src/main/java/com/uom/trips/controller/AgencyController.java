@@ -6,10 +6,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
 import com.uom.trips.model.Agency;
+import com.uom.trips.model.Citizen;
 import com.uom.trips.model.Trip;
 import com.uom.trips.service.AgencyService;
 import com.uom.trips.service.TripService;
@@ -25,8 +27,20 @@ public class AgencyController {
 	private TripService tripService;
 	
 	@PostMapping(path = "/agency/register")
-	public void registerAgency(@Valid @RequestBody Agency agency) throws Exception{
-		agencyService.registerAgency(agency);
+	public ResponseEntity<String> register(@Valid @RequestBody Agency agency, BindingResult result){
+		
+		if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(getValidationErrors(result));
+        }
+		
+		try {
+			agencyService.register(agency);
+			return ResponseEntity.ok("Register successfully!"); 
+		} catch (Exception e) {
+			return ResponseEntity.status(400).body(e.getMessage());
+		}
+		
+		
 	}
 	
 	//new
@@ -38,30 +52,37 @@ public class AgencyController {
 	@PostMapping(path = "/agency/signin")
 	public ResponseEntity<?> signIn(@RequestParam String afm, @RequestParam String password) {
 	    try {
-	        Agency signedInAgency = agencyService.signIn(afm, password);
+	        Optional<Agency> signedInAgency = agencyService.signIn(afm, password);
 
-	        if (signedInAgency != null) {
-	            
-	        	Map<String, Object> response = new HashMap<>();
-	        	response.put("agencyid", signedInAgency.getAgencyid());
-		        response.put("name", signedInAgency.getName());
-		        response.put("message", "Sign-in successful");
-		        return ResponseEntity.ok(response);
-	            
+	        if (signedInAgency.isPresent()) {
+	            Agency agency = signedInAgency.get();
+
+	            Map<String, Object> response = new HashMap<>();
+	            response.put("message", "Sign-in successful");
+	            response.put("AgencyId", agency.getAgencyid());
+	            response.put("Name", agency.getName());
+	            return ResponseEntity.ok(response);
 	        } else {
-	            // Invalid credentials
-	            return ResponseEntity.status(401).body("Invalid email or password");
+	            // Handle the case when the optional is empty (user not found)
+	            return ResponseEntity.status(404).body("User not found");
 	        }
 	    } catch (Exception e) {
-	        
-	        return ResponseEntity.status(500).body("Internal server error");
+	        return ResponseEntity.status(400).body(e.getMessage());
 	    }
 	}
+
 	
 	@PostMapping(path = "/addTrip")
 	public void addTrip(@RequestBody Trip trip) throws Exception{
 		tripService.addTrip(trip);
 	}
+	
+	
+	private String getValidationErrors(BindingResult result) {
+        StringBuilder errors = new StringBuilder();
+        result.getFieldErrors().forEach(error -> errors.append(error.getDefaultMessage()).append(" "));
+        return errors.toString().trim();
+    }
 	
 	
 

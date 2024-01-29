@@ -13,13 +13,19 @@ public class Agency {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int agencyid;
+	
+	@NotBlank(message = "AFM is required.")
+	@Size(min = 9, max = 9, message = "AFM must be 9 digits.")
 	private String afm;
 	
-	@NotBlank(message = "Name is required.")
+	@NotBlank(message = "Name of the agency is required.")
+	@Size(min = 3, max = 12, message = "Name of the agency must be from 3 to 20 characters.")
 	private String name;
 	
 	@NotBlank(message = "Name is required.")
+	@Size(min = 3, max = 12, message = "Name must be from 3 to 20 characters.")
 	private String owner;
+	
 	private String password;
 	
 	@OneToMany(mappedBy = "agency", cascade= CascadeType.ALL, fetch = FetchType.LAZY)

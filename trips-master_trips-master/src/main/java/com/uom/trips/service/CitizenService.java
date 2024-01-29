@@ -27,8 +27,7 @@ public class CitizenService {
 		
 		Optional<Citizen> findByAfm = citizenRepository.findByAfm(citizen.getAfm());
 		Optional<Citizen> findByEmail = citizenRepository.findByEmail(citizen.getEmail());
-		
-		
+				
 		if(!findByAfm.isPresent()) {
 			
 			if (!findByEmail.isPresent()) {
@@ -44,48 +43,23 @@ public class CitizenService {
     }
 	
 	
-	 public Optional<Citizen> signIn(String email, String password) throws Exception {
+	public Optional<Citizen> signIn(String email, String password) throws Exception {
 		 
-	        Optional<Citizen> findByEmail = citizenRepository.findByEmail(email);
+		Optional<Citizen> findByEmail = citizenRepository.findByEmail(email);
 	        
-	        if (findByEmail.isPresent()) {
-	            Citizen citizen = findByEmail.get();
-	            
-	            if (citizen.getPassword().equals(password)) {
-	                return Optional.of(citizen);
-	            } else {
-	                throw new Exception("Wrong password");
-	            }
+	    if (findByEmail.isPresent()) {
+	        Citizen citizen = findByEmail.get();
+	        
+	        if (citizen.getPassword().equals(password)) {
+	            return Optional.of(citizen);
 	        } else {
-	            throw new Exception("Wrong email");
+	            throw new Exception("Wrong password");
 	        }
+	    } else {
+	        throw new Exception("Wrong email");
 	    }
+	}
 
-
-	
-	
-	/*public Citizen signIn(String email, String password) throws Exception {
-	   
-    System.out.println("Received email: " + email);
-    System.out.println("Received password: " + password);
-	
-	
-	   
-    Citizen citizen = citizenRepository.findByEmail(email);
-    
-    
-    System.out.println("Retrieved Citizen: " + citizen);
-
-    // Check if the citizen exists and the password matches
-    if (citizen != null && citizen.getPassword().equals(password)) {
-        return citizen;
-    } else {
-        // If no matching citizen is found or the password is incorrect, return null
-        return null;
-    }
-}*/
-
-	
 
 	
 	public void registerToTrip(Trip trip, Citizen citizen) throws Exception {
@@ -111,15 +85,14 @@ public class CitizenService {
 	}
 	
 
-
 	public List<Citizen> getAllCitizens() throws Exception{
 		return citizenRepository.findAll();
 		
 	}
-	
-
 
 }
+
+
 
 
 
@@ -177,5 +150,27 @@ private boolean isAfmUnique(String afm) {
 			throw new Exception();
 			//System.out.println("No available seats for this trip.");
 		}
+}*/
+
+
+/*public Citizen signIn(String email, String password) throws Exception {
+
+System.out.println("Received email: " + email);
+System.out.println("Received password: " + password);
+
+
+   
+Citizen citizen = citizenRepository.findByEmail(email);
+
+
+System.out.println("Retrieved Citizen: " + citizen);
+
+// Check if the citizen exists and the password matches
+if (citizen != null && citizen.getPassword().equals(password)) {
+    return citizen;
+} else {
+    // If no matching citizen is found or the password is incorrect, return null
+    return null;
+}
 }*/
 

@@ -26,16 +26,6 @@ public class CitizenController {
 	@Autowired
 	private CitizenService citizenService;
 	
-	/*@PostMapping(path = "/register")
-	public ResponseEntity<String> register(@Valid @RequestBody Citizen citizen ){
-		
-		try {
-			citizenService.register(citizen);
-			return ResponseEntity.ok("Register successfully!"); 
-		} catch (Exception e) {
-			return ResponseEntity.status(400).body(e.getMessage());
-		}
-	}*/
 	
 	
 	@PostMapping(path = "/register")
@@ -55,7 +45,6 @@ public class CitizenController {
 		
 	}
 	
-		
 				
 		 
 	@PostMapping(path = "/signin")
@@ -104,7 +93,6 @@ public class CitizenController {
 	
 	private String getValidationErrors(BindingResult result) {
         StringBuilder errors = new StringBuilder();
-        //result.getFieldErrors().forEach(error -> errors.append(error.getField()).append(": ").append(error.getDefaultMessage()).append("; "));
         result.getFieldErrors().forEach(error -> errors.append(error.getDefaultMessage()).append(" "));
         return errors.toString().trim();
     }

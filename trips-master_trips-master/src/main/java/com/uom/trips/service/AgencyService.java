@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uom.trips.model.Agency;
+import com.uom.trips.model.Citizen;
 import com.uom.trips.model.Trip;
 import com.uom.trips.repository.AgencyRepository;
 import com.uom.trips.repository.TripRepository;
@@ -19,30 +20,35 @@ public class AgencyService {
 	@Autowired
 	private TripRepository tripRepository;
 	
-	public void	registerAgency(Agency agency) throws Exception{
-		agencyRepository.save(agency);
-	}
+	public void register(Agency agency) throws Exception{
+		
+		Optional<Agency> findByAfm = agencyRepository.findByAfm(agency.getAfm());
+					
+		if(!findByAfm.isPresent()) {
+			
+			agencyRepository.save(agency);
+		}
+		else {
+			throw new Exception("Afm already exists!");
+		}
+    }
 	
-	
-	public Agency signIn(String afm, String password) throws Exception {
-	   	 
-	       System.out.println("Received afm: " + afm);
-	       System.out.println("Received password: " + password);
-	   	
-	   	
-	   	
-	       Agency agency = agencyRepository.findByAfm(afm);
-	       
-	      
-	       System.out.println("Retrieved Agency: " + agency);
 
-	       // Check if the citizen exists and the password matches
-	       if (agency != null && agency.getPassword().equals(password)) {
-	           return agency;
-	       } else {
-	           // If no matching citizen is found or the password is incorrect, return null
-	           return null;
-	       }
+	public Optional<Agency> signIn(String afm, String password) throws Exception {
+		 
+		Optional<Agency> findByAfm = agencyRepository.findByAfm(afm);
+	        
+	    if (findByAfm.isPresent()) {
+	        Agency agency = findByAfm.get();
+	        
+	        if (agency.getPassword().equals(password)) {
+	            return Optional.of(agency);
+	        } else {
+	            throw new Exception("Wrong password");
+	        }
+	    } else {
+	        throw new Exception("Wrong Afm");
+	    }
 	}
 	
 	public void addTrip(Trip trip) throws Exception {

@@ -8,7 +8,7 @@ import com.uom.trips.model.Agency;
 
 public interface AgencyRepository extends JpaRepository<Agency, Integer>{
 	
-	Agency findByAfm(String afm);
+	Optional<Agency> findByAfm(String afm);
 	
 	Optional<Agency> findById(int agencyId);
 
