@@ -45,7 +45,7 @@ public class CitizenController {
 		
 	}
 	
-				
+			
 		 
 	@PostMapping(path = "/signin")
 	public ResponseEntity<?> signIn(@RequestParam String email, @RequestParam String password) {
