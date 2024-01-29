@@ -8,12 +8,20 @@ import com.uom.trips.model.Citizen;
 
 public interface CitizenRepository extends JpaRepository<Citizen, Integer>{
 	
-	Citizen findByEmail(String email);
+	//Citizen findByEmail(String email);
+	
+	
 	
 	//Citizen findById(int citizenId);
 	
 	//Optional<Citizen> findByIdOptional (int citizenId);
 	
-	Citizen findByAfm (String afm);
+	Optional<Citizen> findByAfm (String afm);
+	
+	Optional<Citizen> findByEmail(String email);
+	
+	Optional<Citizen> findByPassword(String password);
+	
+	
 }
 

@@ -20,15 +20,21 @@ public class Citizen {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int citizenId;
+	
+	@NotBlank(message = "AFM is required.")
+	@Size(min = 9, max = 9, message = "AFM must be 9 digits.")
 	private String afm;
 	
 	@NotBlank(message = "First name is required.")
+	@Size(min = 3, max = 12, message = "First name must be from 3 to 20 characters.")
 	private String firstName;
+	
 	@NotBlank(message = "Last name is required.")
+	@Size(min = 3, max = 12, message = "Last name must be from 3 to 20 characters.")
 	private String lastName;
 	
-	@NotEmpty(message = "The email is required.")
-	@Email(message = "The email is not a valid email.")
+	@NotEmpty(message = "Email is required.")
+	@Email(message = "Please use a valid email.")
 	private String email;
 	private String password;
 	
