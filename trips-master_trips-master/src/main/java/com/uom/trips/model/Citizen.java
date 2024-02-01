@@ -26,11 +26,11 @@ public class Citizen {
 	private String afm;
 	
 	@NotBlank(message = "First name is required.")
-	@Size(min = 3, max = 12, message = "First name must be from 3 to 20 characters.")
+	@Size(min = 3, max = 20, message = "First name must be from 3 to 20 characters.")
 	private String firstName;
 	
 	@NotBlank(message = "Last name is required.")
-	@Size(min = 3, max = 12, message = "Last name must be from 3 to 20 characters.")
+	@Size(min = 3, max = 20, message = "Last name must be from 3 to 20 characters.")
 	private String lastName;
 	
 	@NotEmpty(message = "Email is required.")

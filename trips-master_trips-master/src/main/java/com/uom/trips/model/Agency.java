@@ -19,11 +19,11 @@ public class Agency {
 	private String afm;
 	
 	@NotBlank(message = "Name of the agency is required.")
-	@Size(min = 3, max = 12, message = "Name of the agency must be from 3 to 20 characters.")
+	@Size(min = 3, max = 20, message = "Name of the agency must be from 3 to 20 characters.")
 	private String name;
 	
 	@NotBlank(message = "Name is required.")
-	@Size(min = 3, max = 12, message = "Name must be from 3 to 20 characters.")
+	@Size(min = 3, max = 20, message = "Name must be from 3 to 20 characters.")
 	private String owner;
 	
 	private String password;
