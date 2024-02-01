@@ -43,7 +43,7 @@ public class AgencyController {
 		
 	}
 	
-	//new
+	
 	@GetMapping(path = "/agencies")
 	public List<Agency> getAllAgencies() throws Exception{
 		return agencyService.getAllAgencies();
@@ -63,7 +63,7 @@ public class AgencyController {
 	            response.put("Name", agency.getName());
 	            return ResponseEntity.ok(response);
 	        } else {
-	            // Handle the case when the optional is empty (user not found)
+	            
 	            return ResponseEntity.status(404).body("User not found");
 	        }
 	    } catch (Exception e) {
@@ -83,8 +83,7 @@ public class AgencyController {
         result.getFieldErrors().forEach(error -> errors.append(error.getDefaultMessage()).append(" "));
         return errors.toString().trim();
     }
-	
-	
+		
 
 }
 

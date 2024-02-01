@@ -43,39 +43,6 @@ public class TripService {
    
 	}
 	
-	/*public void registerCitizenToTrip(Trip trip) {
-		
-		Optional<Trip> tripByIOptional = tripRepository.findById(trip.getTravelId());
-		//Optional<Citizen> CitizenbyIdOptional = citizenRepository.findById(citizen.getCitizenId());
-		
-	
-	
-		int maxLimit = trip.getMaxLimit();
-		if (maxLimit > 0) {
-			trip.setMaxLimit(maxLimit - 1);
-			//citizen.addTripToCitizen(trip);
-			trip.registerCitizenToTrip(citizen);
-			// Save as a good practice, since cascadeType is not .ALL
-			tripRepository.save(trip);
-			//citizenRepository.save(citizen);
-			} 
-			else {
-				throw new Exception();
-				//System.out.println("No available seats for this trip.");
-			}
-	}*/
-	
-	//new
-	/*public Trip trip (int tripId) {
-		Trip trip = tripRepository.findById(tripId);
-		return trip;
-			}
-	
-	
-	public Trip getTripById(int travelId) throws Exception{
-		return tripRepository.findById(travelId);
-		
-	}*/
 	
 	
 	public List<Trip> findTripsByArrivalLocation(String arrivalLocation) throws Exception{

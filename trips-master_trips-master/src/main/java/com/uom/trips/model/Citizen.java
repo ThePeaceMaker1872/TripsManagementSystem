@@ -43,17 +43,6 @@ public class Citizen {
 	private Set<Trip> trips = new HashSet<Trip>();
 	
 	
-	/*
-	//Rollback
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="reservations",
-		joinColumns = @JoinColumn(name="citizenId"),
-	   inverseJoinColumns = @JoinColumn(name="travelId"))
-	private Set<Trip> trips = new HashSet<Trip>();*/
-	
-	
-
-	//new
 	public void addTripToCitizen(Trip trip) throws Exception {
 		trips.add(trip);
 		//new

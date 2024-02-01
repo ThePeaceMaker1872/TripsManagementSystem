@@ -61,7 +61,6 @@ public class AgencyService {
    
 	}
 	
-	//new
 	public List<Agency> getAllAgencies() throws Exception{
 		return agencyRepository.findAll();
 		

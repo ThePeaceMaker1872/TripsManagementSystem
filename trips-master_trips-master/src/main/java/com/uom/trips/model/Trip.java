@@ -22,6 +22,7 @@ public class Trip {
 	private Date departureDate;
 	private Date arrivalDate;
 	private int maxLimit;
+	@Column(columnDefinition = "TEXT")
 	private String description;
 	
 	@ManyToOne
@@ -40,22 +41,6 @@ public class Trip {
 	}
 	
 	
-	
-	/*//Rollback
-	@ManyToMany(mappedBy="trips")
-	private Set<Citizen> citizens = new HashSet<Citizen>();*/
-	
-	//new
-	/*public void setAgency(Agency agency) {
-		this.agency = agency;
-		agency.addTrip(this);
-	}
-			
-	//new
-	public void addCitizenToTrip(Citizen citizen) {
-	     citizens.add(citizen);
-	 }
-	*/
 	
 		
 	public Trip() {}

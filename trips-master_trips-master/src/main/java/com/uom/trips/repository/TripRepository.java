@@ -8,15 +8,11 @@ import com.uom.trips.model.Trip;
 
 public interface TripRepository extends JpaRepository<Trip, Integer>{
 	
-	//Optional<Trip> findByArrivalLocation(String arrivalLocation);
 	
 	public List<Trip> findByArrivalLocation(String arrivalLocation);
 	
 	public List<Trip> findByDepartureLocation(String departureLocation);
 		
-	//Trip findById(int tripId);
-	
-	//Optional<Trip> findByIdOptional(int travelId);
 	
 	
 }
